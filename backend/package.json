@@ -41,6 +41,8 @@
     "core-js": "^2.4.1",
     "nodemon": "^1.11.0",
     "ts-node": "^3.0.4",
-    "typescript": "^2.3.2"
+    "typescript": "^2.3.2",
+    "expect": "^21.2.1",
+    "should": "^13.1.3"
   }
 }
