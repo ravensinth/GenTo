@@ -1,29 +1,27 @@
-pragma solidity ^0.4.8;
+pragma solidity ^0.4.11;
 
-import "./ERC20Interface.sol";
+import '../node_modules/zeppelin-solidity/contracts/token/StandardToken.sol';
 
-contract FixedSupplyToken is ERC20Interface {
+contract FixedSupplyToken  is StandardToken {// is ERC20Interface {
     string public symbol = "";
     string public name = "";
 
     uint256 public creationDate;
 
     uint8 public constant decimals = 18;
-    uint256 _totalSupply = 0;
+    uint256 totalSupply = 0;
 
-    uint256 saleStart = 0;
-    uint256 saleEnd = 0;
-    uint256 saleDuration = 0;
 
     // Owner of this contract
     address public owner;
-
+/*
     // Balances for each account
     mapping(address => uint256) balances;
 
     // Owner of account approves the transfer of an amount to another account
     mapping(address => mapping (address => uint256)) allowed;
-
+*/
+    /*
     // Functions with this modifier can only be executed by the owner
     modifier onlyOwner() {
         if (msg.sender != owner) {
@@ -36,32 +34,24 @@ contract FixedSupplyToken is ERC20Interface {
         require(now >= timestamp);
         _;
     }
-
     modifier saleRunning() {
         if(now < saleStart || now > saleEnd) {
             throw;
         }
         _;
     }
-
+*/
     // Constructor
-    function FixedSupplyToken(uint256 totalSupply, address _owner, string _symbol, string _name, uint256 _buyPrice, uint256 _sellPrice, uint _saleStart, uint _saleEnd) {
-        if(_saleEnd < _saleStart){
-            throw;
-        }
+    function FixedSupplyToken(uint256 _totalSupply, address _owner, string _symbol, string _name) {
+
         owner = _owner;
-        _totalSupply = totalSupply;
+        totalSupply = _totalSupply;
         balances[owner] = _totalSupply;
         symbol = _symbol;
         name = _name;
-        buyPrice = _buyPrice;
-        sellPrice = _sellPrice;
-        saleEnd = _saleEnd;
-        saleStart = _saleStart;
-        saleDuration = saleEnd - saleStart;
         creationDate = now;
     }
-
+/*
 
     function totalSupply() constant returns (uint256 totalSupply) {
         totalSupply = _totalSupply;
@@ -123,8 +113,6 @@ contract FixedSupplyToken is ERC20Interface {
         return allowed[_owner][_spender];
     }
 
-    uint256 public sellPrice;
-    uint256 public buyPrice;
-
+*/
 
 }
