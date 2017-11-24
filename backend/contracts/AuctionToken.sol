@@ -1,5 +1,4 @@
 pragma solidity ^0.4.8;
-//import "./FixedSupplyToken.sol";
 
 import '../node_modules/zeppelin-solidity/contracts/token/StandardToken.sol';
 
@@ -57,11 +56,10 @@ contract AuctionToken  is StandardToken {
     function getBuyPrice() constant returns (uint) {
         uint currentPrice;
         uint passed;
+        passed = now - saleStart;
         if(buyPriceStart < buyPriceEnd) {
-            passed = now - saleStart;
             currentPrice = buyPriceStart + (((buyPriceEnd - buyPriceStart) * passed) / saleDuration);
         } else if (buyPriceStart > buyPriceEnd) {
-            passed = now - saleStart;
             currentPrice = buyPriceStart - (((buyPriceStart - buyPriceEnd) * passed) / saleDuration);
         } else {
             currentPrice = buyPriceStart;
@@ -92,7 +90,7 @@ contract AuctionToken  is StandardToken {
         Transfer(owner, msg.sender, amount);                // execute an event reflecting the change
         return amount;                                     // ends function and returns
     }
-
+/*
     function sell(uint amount) returns (uint256 revenue){
         if (balances[msg.sender] < amount ) throw;        // checks if the sender has enough to sell
         balances[owner] += amount;                         // adds the amount to owner's balance
@@ -104,5 +102,5 @@ contract AuctionToken  is StandardToken {
             Transfer(msg.sender, owner, amount);             // executes an event reflecting on the change
             return revenue;                                 // ends function and returns
         }
-    }
+    }*/
 }
